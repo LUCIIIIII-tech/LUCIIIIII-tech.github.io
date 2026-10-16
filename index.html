@@ -122,26 +122,6 @@
   .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 120; pointer-events: none; }
   .progress i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transform: scaleX(0); transform-origin: left; }
 
-  /* Custom cursor */
-  .cursor-dot, .cursor-ring { position: fixed; left: 0; top: 0; z-index: 150; pointer-events: none; opacity: 0; transition: opacity .3s; }
-  .cursor-on .cursor-dot, .cursor-on .cursor-ring { opacity: 1; }
-  .cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--accent); }
-  .cursor-ring { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
-  .cursor-ring i {
-    position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(255,255,255,.45);
-    transition: transform .35s var(--ease), background .3s, border-color .3s;
-  }
-  .cursor-ring span {
-    position: absolute; inset: 0; display: grid; place-items: center;
-    font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #fff;
-    opacity: 0; transform: scale(.6); transition: opacity .25s, transform .35s var(--ease);
-  }
-  .cursor-ring.is-link i { transform: scale(1.5); border-color: var(--accent); background: rgba(255,77,46,.08); }
-  .cursor-ring.is-label i { transform: scale(2.1); background: var(--accent); border-color: var(--accent); }
-  .cursor-ring.is-label span { opacity: 1; transform: scale(1); }
-  .cursor-ring.down i { transform: scale(.8); }
-  .has-cursor, .has-cursor * { cursor: none !important; }
-
   /* Nav */
   .nav {
     position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); left: 0; right: 0; margin-inline: auto; z-index: 100;
@@ -338,7 +318,7 @@
   }
   .play svg { width: 26px; height: 26px; color: #fff; margin-left: 4px; }
   .reel:hover .play { transform: translate(-50%,-50%) scale(1); background: var(--accent); border-color: var(--accent); }
-  .reel.playing .play, .has-cursor .reel:hover .play { opacity: 0; }
+  .reel.playing .play { opacity: 0; }
   .reel-body { padding: 18px 4px 0; }
   .reel-body h3 { font-family: var(--display); font-size: 19px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; }
   .reel-body p { color: var(--muted); font-size: 14px; margin-top: 6px; }
@@ -609,8 +589,6 @@
 </div>
 
 <div class="progress" aria-hidden="true"><i id="progress"></i></div>
-<div class="cursor-dot" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"><i></i><span></span></div>
 <div class="bg-glow" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
@@ -744,7 +722,7 @@
       </div>
 
       <div class="reels">
-        <button class="reel reveal" data-src="videos/work-1.mp4" data-title="Elon Musk's Net Worth" data-cursor="Play" aria-label="Play video: Elon Musk's Net Worth">
+        <button class="reel reveal" data-src="videos/work-1.mp4" data-title="Elon Musk's Net Worth" aria-label="Play video: Elon Musk's Net Worth">
           <div class="reel-media">
             <img src="videos/work-1.jpg" alt="" loading="lazy">
             <video muted loop playsinline preload="none" data-preview="videos/work-1.mp4"></video>
@@ -758,7 +736,7 @@
           </div>
         </button>
 
-        <button class="reel reveal" style="--d:.1s" data-src="videos/eo-satellites.mp4" data-title="Earth-Observation Satellites Are Becoming Real-Time Sensor Networks" data-cursor="Play" aria-label="Play video: Earth-Observation Satellites Are Becoming Real-Time Sensor Networks">
+        <button class="reel reveal" style="--d:.1s" data-src="videos/eo-satellites.mp4" data-title="Earth-Observation Satellites Are Becoming Real-Time Sensor Networks" aria-label="Play video: Earth-Observation Satellites Are Becoming Real-Time Sensor Networks">
           <div class="reel-media">
             <img src="videos/eo-satellites.jpg" alt="" loading="lazy">
             <video muted loop playsinline preload="none" data-preview="videos/eo-satellites.mp4"></video>
@@ -772,7 +750,7 @@
           </div>
         </button>
 
-        <button class="reel reveal" style="--d:.2s" data-src="videos/methane-leaks.mp4" data-title="AI and Satellites Are Getting Better at Finding Methane Leaks" data-cursor="Play" aria-label="Play video: AI and Satellites Are Getting Better at Finding Methane Leaks">
+        <button class="reel reveal" style="--d:.2s" data-src="videos/methane-leaks.mp4" data-title="AI and Satellites Are Getting Better at Finding Methane Leaks" aria-label="Play video: AI and Satellites Are Getting Better at Finding Methane Leaks">
           <div class="reel-media">
             <img src="videos/methane-leaks.jpg" alt="" loading="lazy">
             <video muted loop playsinline preload="none" data-preview="videos/methane-leaks.mp4"></video>
@@ -807,24 +785,24 @@
     </div>
     <div class="gif-rows">
       <div class="gif-row"><div class="gif-track" data-marquee>
-        <button class="gif" data-hd="gifs/bird-dog-hd.mp4" data-title="Bird Dog Reach" data-cursor="View" aria-label="View GIF: Bird Dog Reach"><video muted loop playsinline preload="none" poster="gifs/bird-dog.jpg" data-src="gifs/bird-dog.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Bird Dog Reach</b><small>Cue · No breath hold</small></span></button>
-        <button class="gif" data-hd="gifs/chair-squat-hd.mp4" data-title="Squat to Chair Tap" data-cursor="View" aria-label="View GIF: Squat to Chair Tap"><video muted loop playsinline preload="none" poster="gifs/chair-squat.jpg" data-src="gifs/chair-squat.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Squat to Chair Tap</b><small>Cue · Safe grip</small></span></button>
-        <button class="gif" data-hd="gifs/bridge-march-hd.mp4" data-title="Bridge March" data-cursor="View" aria-label="View GIF: Bridge March"><video muted loop playsinline preload="none" poster="gifs/bridge-march.jpg" data-src="gifs/bridge-march.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Bridge March</b><small>Cue · Hips level</small></span></button>
-        <button class="gif" data-hd="gifs/cable-chop-hd.mp4" data-title="Half-Kneeling Cable Chop" data-cursor="View" aria-label="View GIF: Half-Kneeling Cable Chop"><video muted loop playsinline preload="none" poster="gifs/cable-chop.jpg" data-src="gifs/cable-chop.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Half-Kneeling Cable Chop</b><small>Cue · Tall spine</small></span></button>
-        <button class="gif" data-hd="gifs/hip-airplane-hd.mp4" data-title="Hip Airplane Reach" data-cursor="View" aria-label="View GIF: Hip Airplane Reach"><video muted loop playsinline preload="none" poster="gifs/hip-airplane.jpg" data-src="gifs/hip-airplane.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Hip Airplane Reach</b><small>Cue · Glute squeeze</small></span></button>
-        <button class="gif" data-hd="gifs/side-brace-hd.mp4" data-title="Modified Side Brace" data-cursor="View" aria-label="View GIF: Modified Side Brace"><video muted loop playsinline preload="none" poster="gifs/side-brace.jpg" data-src="gifs/side-brace.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Modified Side Brace</b><small>Cue · Ribs down</small></span></button>
-        <button class="gif" data-hd="gifs/chest-press-hd.mp4" data-title="Medicine Ball Chest Press" data-cursor="View" aria-label="View GIF: Medicine Ball Chest Press"><video muted loop playsinline preload="none" poster="gifs/chest-press.jpg" data-src="gifs/chest-press.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Medicine Ball Chest Press</b><small>Cue · Knees track forward</small></span></button>
-        <button class="gif" data-hd="gifs/wall-calf-hd.mp4" data-title="Wall Push-Up to Calf Raise" data-cursor="View" aria-label="View GIF: Wall Push-Up to Calf Raise"><video muted loop playsinline preload="none" poster="gifs/wall-calf.jpg" data-src="gifs/wall-calf.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Wall Push-Up to Calf Raise</b><small>Cue · Knees track forward</small></span></button>
+        <button class="gif" data-hd="gifs/bird-dog-hd.mp4" data-title="Bird Dog Reach" aria-label="View GIF: Bird Dog Reach"><video muted loop playsinline preload="none" poster="gifs/bird-dog.jpg" data-src="gifs/bird-dog.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Bird Dog Reach</b><small>Cue · No breath hold</small></span></button>
+        <button class="gif" data-hd="gifs/chair-squat-hd.mp4" data-title="Squat to Chair Tap" aria-label="View GIF: Squat to Chair Tap"><video muted loop playsinline preload="none" poster="gifs/chair-squat.jpg" data-src="gifs/chair-squat.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Squat to Chair Tap</b><small>Cue · Safe grip</small></span></button>
+        <button class="gif" data-hd="gifs/bridge-march-hd.mp4" data-title="Bridge March" aria-label="View GIF: Bridge March"><video muted loop playsinline preload="none" poster="gifs/bridge-march.jpg" data-src="gifs/bridge-march.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Bridge March</b><small>Cue · Hips level</small></span></button>
+        <button class="gif" data-hd="gifs/cable-chop-hd.mp4" data-title="Half-Kneeling Cable Chop" aria-label="View GIF: Half-Kneeling Cable Chop"><video muted loop playsinline preload="none" poster="gifs/cable-chop.jpg" data-src="gifs/cable-chop.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Half-Kneeling Cable Chop</b><small>Cue · Tall spine</small></span></button>
+        <button class="gif" data-hd="gifs/hip-airplane-hd.mp4" data-title="Hip Airplane Reach" aria-label="View GIF: Hip Airplane Reach"><video muted loop playsinline preload="none" poster="gifs/hip-airplane.jpg" data-src="gifs/hip-airplane.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Hip Airplane Reach</b><small>Cue · Glute squeeze</small></span></button>
+        <button class="gif" data-hd="gifs/side-brace-hd.mp4" data-title="Modified Side Brace" aria-label="View GIF: Modified Side Brace"><video muted loop playsinline preload="none" poster="gifs/side-brace.jpg" data-src="gifs/side-brace.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Modified Side Brace</b><small>Cue · Ribs down</small></span></button>
+        <button class="gif" data-hd="gifs/chest-press-hd.mp4" data-title="Medicine Ball Chest Press" aria-label="View GIF: Medicine Ball Chest Press"><video muted loop playsinline preload="none" poster="gifs/chest-press.jpg" data-src="gifs/chest-press.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Medicine Ball Chest Press</b><small>Cue · Knees track forward</small></span></button>
+        <button class="gif" data-hd="gifs/wall-calf-hd.mp4" data-title="Wall Push-Up to Calf Raise" aria-label="View GIF: Wall Push-Up to Calf Raise"><video muted loop playsinline preload="none" poster="gifs/wall-calf.jpg" data-src="gifs/wall-calf.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Wall Push-Up to Calf Raise</b><small>Cue · Knees track forward</small></span></button>
       </div></div>
       <div class="gif-row"><div class="gif-track reverse" data-marquee>
-        <button class="gif" data-hd="gifs/step-up-hd.mp4" data-title="Step-Up to Overhead Reach" data-cursor="View" aria-label="View GIF: Step-Up to Overhead Reach"><video muted loop playsinline preload="none" poster="gifs/step-up.jpg" data-src="gifs/step-up.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Step-Up to Overhead Reach</b><small>Cue · Safe grip</small></span></button>
-        <button class="gif" data-hd="gifs/monster-walk-hd.mp4" data-title="Banded Monster Walk" data-cursor="View" aria-label="View GIF: Banded Monster Walk"><video muted loop playsinline preload="none" poster="gifs/monster-walk.jpg" data-src="gifs/monster-walk.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Banded Monster Walk</b><small>Cue · No trunk twist</small></span></button>
-        <button class="gif" data-hd="gifs/dead-bug-hd.mp4" data-title="Dead Bug Heel Tap" data-cursor="View" aria-label="View GIF: Dead Bug Heel Tap"><video muted loop playsinline preload="none" poster="gifs/dead-bug.jpg" data-src="gifs/dead-bug.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Dead Bug Heel Tap</b><small>Cue · Hips level</small></span></button>
-        <button class="gif" data-hd="gifs/plank-hd.mp4" data-title="Kneeling Plank Hold" data-cursor="View" aria-label="View GIF: Kneeling Plank Hold"><video muted loop playsinline preload="none" poster="gifs/plank.jpg" data-src="gifs/plank.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Kneeling Plank Hold</b><small>Cue · Hips level</small></span></button>
-        <button class="gif" data-hd="gifs/smooth-pursuit-hd.mp4" data-title="Smooth Pursuit Eye Drill" data-cursor="View" aria-label="View GIF: Smooth Pursuit Eye Drill"><video muted loop playsinline preload="none" poster="gifs/smooth-pursuit.jpg" data-src="gifs/smooth-pursuit.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Smooth Pursuit Eye Drill</b><small>Cue · Only eyes move</small></span></button>
-        <button class="gif" data-hd="gifs/spanish-squat-hd.mp4" data-title="Spanish Squat Band Hold" data-cursor="View" aria-label="View GIF: Spanish Squat Band Hold"><video muted loop playsinline preload="none" poster="gifs/spanish-squat.jpg" data-src="gifs/spanish-squat.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Spanish Squat Band Hold</b><small>Cue · Foot tripod</small></span></button>
-        <button class="gif" data-hd="gifs/fire-hydrant-hd.mp4" data-title="Fire Hydrant Lift" data-cursor="View" aria-label="View GIF: Fire Hydrant Lift"><video muted loop playsinline preload="none" poster="gifs/fire-hydrant.jpg" data-src="gifs/fire-hydrant.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Fire Hydrant Lift</b><small>Cue · Glute squeeze</small></span></button>
-        <button class="gif" data-hd="gifs/heel-toe-rock-hd.mp4" data-title="Heel-Toe Rock with Chair" data-cursor="View" aria-label="View GIF: Heel-Toe Rock with Chair"><video muted loop playsinline preload="none" poster="gifs/heel-toe-rock.jpg" data-src="gifs/heel-toe-rock.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Heel-Toe Rock with Chair</b><small>Cue · Foot tripod</small></span></button>
+        <button class="gif" data-hd="gifs/step-up-hd.mp4" data-title="Step-Up to Overhead Reach" aria-label="View GIF: Step-Up to Overhead Reach"><video muted loop playsinline preload="none" poster="gifs/step-up.jpg" data-src="gifs/step-up.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Step-Up to Overhead Reach</b><small>Cue · Safe grip</small></span></button>
+        <button class="gif" data-hd="gifs/monster-walk-hd.mp4" data-title="Banded Monster Walk" aria-label="View GIF: Banded Monster Walk"><video muted loop playsinline preload="none" poster="gifs/monster-walk.jpg" data-src="gifs/monster-walk.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Banded Monster Walk</b><small>Cue · No trunk twist</small></span></button>
+        <button class="gif" data-hd="gifs/dead-bug-hd.mp4" data-title="Dead Bug Heel Tap" aria-label="View GIF: Dead Bug Heel Tap"><video muted loop playsinline preload="none" poster="gifs/dead-bug.jpg" data-src="gifs/dead-bug.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Dead Bug Heel Tap</b><small>Cue · Hips level</small></span></button>
+        <button class="gif" data-hd="gifs/plank-hd.mp4" data-title="Kneeling Plank Hold" aria-label="View GIF: Kneeling Plank Hold"><video muted loop playsinline preload="none" poster="gifs/plank.jpg" data-src="gifs/plank.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Kneeling Plank Hold</b><small>Cue · Hips level</small></span></button>
+        <button class="gif" data-hd="gifs/smooth-pursuit-hd.mp4" data-title="Smooth Pursuit Eye Drill" aria-label="View GIF: Smooth Pursuit Eye Drill"><video muted loop playsinline preload="none" poster="gifs/smooth-pursuit.jpg" data-src="gifs/smooth-pursuit.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Smooth Pursuit Eye Drill</b><small>Cue · Only eyes move</small></span></button>
+        <button class="gif" data-hd="gifs/spanish-squat-hd.mp4" data-title="Spanish Squat Band Hold" aria-label="View GIF: Spanish Squat Band Hold"><video muted loop playsinline preload="none" poster="gifs/spanish-squat.jpg" data-src="gifs/spanish-squat.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Spanish Squat Band Hold</b><small>Cue · Foot tripod</small></span></button>
+        <button class="gif" data-hd="gifs/fire-hydrant-hd.mp4" data-title="Fire Hydrant Lift" aria-label="View GIF: Fire Hydrant Lift"><video muted loop playsinline preload="none" poster="gifs/fire-hydrant.jpg" data-src="gifs/fire-hydrant.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Fire Hydrant Lift</b><small>Cue · Glute squeeze</small></span></button>
+        <button class="gif" data-hd="gifs/heel-toe-rock-hd.mp4" data-title="Heel-Toe Rock with Chair" aria-label="View GIF: Heel-Toe Rock with Chair"><video muted loop playsinline preload="none" poster="gifs/heel-toe-rock.jpg" data-src="gifs/heel-toe-rock.mp4"></video><span class="gif-badge">GIF</span><span class="gif-cap"><b>Heel-Toe Rock with Chair</b><small>Cue · Foot tripod</small></span></button>
       </div></div>
     </div>
     <div class="wrap"><p class="hint mono"><span class="dot"></span>Hover a row to pause · click any loop to view it large</p></div>
@@ -1031,7 +1009,7 @@
         <p>I'm open to remote social media and video roles.</p>
         <div class="email-big">
           <span id="email-text">johnairick08@gmail.com</span>
-          <button class="copy-btn" id="copy" aria-label="Copy email address" data-cursor="Copy"><svg><use href="#i-copy"/></svg></button>
+          <button class="copy-btn" id="copy" aria-label="Copy email address"><svg><use href="#i-copy"/></svg></button>
         </div>
         <div class="cta-actions">
           <a class="btn btn-primary" href="mailto:johnairick08@gmail.com" data-magnetic><svg><use href="#i-mail"/></svg>Send an email</a>
@@ -1059,7 +1037,7 @@
   </div>
 </footer>
 
-<button class="to-top" id="to-top" aria-label="Back to top" data-cursor="Top">
+<button class="to-top" id="to-top" aria-label="Back to top">
   <svg class="ring" viewBox="0 0 52 52" aria-hidden="true"><circle class="bg" cx="26" cy="26" r="23"/><circle class="fg" id="to-top-ring" cx="26" cy="26" r="23"/></svg>
   <svg class="arrow"><use href="#i-arrow"/></svg>
 </button>
@@ -1301,27 +1279,6 @@
 
   /* ---------- Pointer effects (desktop) ---------- */
   if (fine && !isStatic) {
-    root.classList.add("has-cursor");
-    const dot = $(".cursor-dot"), cring = $(".cursor-ring"), label = $("span", cring);
-    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
-    addEventListener("pointermove", e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.transform = `translate(${mx}px, ${my}px)`;
-      root.classList.add("cursor-on");
-    }, { passive: true });
-    document.addEventListener("pointerleave", () => root.classList.remove("cursor-on"));
-    const follow = () => { rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2; cring.style.transform = `translate(${rx}px, ${ry}px)`; requestAnimationFrame(follow); };
-    requestAnimationFrame(follow);
-    document.addEventListener("pointerover", e => {
-      const t = e.target.closest("[data-cursor], a, button");
-      const text = t && t.dataset.cursor;
-      cring.classList.toggle("is-label", !!text);
-      cring.classList.toggle("is-link", !!t && !text);
-      if (text) label.textContent = text;
-    });
-    addEventListener("pointerdown", () => cring.classList.add("down"));
-    addEventListener("pointerup", () => cring.classList.remove("down"));
-
     $$(".tile").forEach(t => t.addEventListener("pointermove", e => {
       const r = t.getBoundingClientRect();
       t.style.setProperty("--mx", (e.clientX - r.left) + "px");
@@ -1362,7 +1319,6 @@
     pvid.loop = square;
     pvid.src = src;
     dlg.showModal();
-    root.classList.remove("has-cursor");
     if (lenis) lenis.stop();
     pvid.play().catch(() => {});
   };
@@ -1388,7 +1344,6 @@
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
   dlg.addEventListener("close", () => {
     pvid.pause(); pvid.removeAttribute("src"); pvid.load();
-    if (fine && !isStatic) root.classList.add("has-cursor");
     if (lenis) lenis.start();
   });
 
